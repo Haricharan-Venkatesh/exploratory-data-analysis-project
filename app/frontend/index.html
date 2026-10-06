@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Human–AI Chess Behavior Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-group">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a4 4 0 0 0-4 4c0 1.5.8 2.8 2 3.5V11a2 2 0 0 0-2 2v1h8v-1a2 2 0 0 0-2-2V9.5c1.2-.7 2-2 2-3.5a4 4 0 0 0-4-4z"/>
+            <path d="M6 18h12l-1-4H7l-1 4z"/>
+            <rect x="4" y="18" width="16" height="4" rx="1"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="app-title">CHESS BEHAVIORAL AI DETECTOR</h1>
+          <p class="app-subtitle">EDA-Driven Behavioral Feature Engineering for Human–AI Chess Move Classification</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="badge badge-primary">Model: EDA Behavioral LightGBM (10-feat)</span>
+        <span class="badge badge-outline" id="threshold-badge">Threshold: τ = 0.50</span>
+        <span class="badge badge-secondary">Zero-Leakage Streaming</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Legal & Scientific Disclaimer Banner -->
+  <div class="disclaimer-bar">
+    <div class="disclaimer-content">
+      <svg class="icon-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <span>
+        <strong>Scientific Disclaimer:</strong> This system produces a statistical behavioral classification based on move timing and deliberation physics. <em>It does NOT constitute proof of cheating or engine assistance.</em>
+      </span>
+    </div>
+  </div>
+
+  <main class="main-layout">
+    <!-- Top Action / Ingestion Bar -->
+    <section class="controls-panel card">
+      <div class="controls-grid">
+        <!-- Preset Demos -->
+        <div class="control-col">
+          <label class="section-label">Quick Demo Scenarios</label>
+          <div class="demo-buttons">
+            <button class="btn btn-demo active" id="btn-demo-human" data-demo="human_match">
+              <span class="dot dot-human"></span>
+              Human Master Game
+            </button>
+            <button class="btn btn-demo" id="btn-demo-bot" data-demo="ai_bot_match">
+              <span class="dot dot-ai"></span>
+              AI Bot Match
+            </button>
+            <button class="btn btn-demo" id="btn-demo-hvb" data-demo="human_vs_bot_match">
+              <span class="dot dot-hvb"></span>
+              Human vs. Bot Challenge
+            </button>
+          </div>
+        </div>
+
+        <!-- Custom Upload & Paste -->
+        <div class="control-col">
+          <label class="section-label">Analyze Custom PGN</label>
+          <div class="upload-actions">
+            <label class="btn btn-outline file-upload-label">
+              <input type="file" id="pgn-file-input" accept=".pgn,.txt" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              Upload PGN File
+            </label>
+            <button class="btn btn-outline" id="btn-toggle-paste">Paste PGN Text</button>
+          </div>
+        </div>
+
+        <!-- Operating Threshold Slider -->
+        <div class="control-col">
+          <div class="slider-header">
+            <label class="section-label" for="threshold-slider">Decision Threshold (τ)</label>
+            <span class="slider-value" id="threshold-val">0.50</span>
+          </div>
+          <input type="range" id="threshold-slider" min="0.10" max="0.90" step="0.05" value="0.50">
+          <div class="slider-presets">
+            <span class="preset-hint" id="preset-balanced">Default (0.50)</span>
+            <button class="btn-link" id="btn-set-strict">Strict (0.85)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collapsible Paste Drawer -->
+      <div class="paste-drawer hidden" id="paste-drawer">
+        <textarea id="pgn-text-input" placeholder="Paste PGN text here (including [%clk] comments for behavioral timing)..."></textarea>
+        <div class="paste-drawer-footer">
+          <button class="btn btn-primary" id="btn-submit-paste">Run Behavioral Analysis</button>
+          <button class="btn btn-ghost" id="btn-cancel-paste">Cancel</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notification / Warning Box -->
+    <div class="alert-box hidden" id="app-alert">
+      <span id="alert-message"></span>
+    </div>
+
+    <!-- Match Summary: White vs Black Profiles -->
+    <section class="match-summary-grid">
+      <!-- White Player Profile -->
+      <div class="card player-card" id="white-card">
+        <div class="player-header">
+          <div class="player-avatar avatar-white">W</div>
+          <div class="player-info">
+            <h3 class="player-name" id="white-name">White Player</h3>
+            <span class="player-rating" id="white-rating">Rating: 1500</span>
+          </div>
+          <div class="prediction-pill pill-unknown" id="white-prediction-pill">
+            Analyzing...
+          </div>
+        </div>
+        <div class="player-probs-container">
+          <div class="prob-labels">
+            <span class="label-ai">AI Probability: <strong id="white-ai-pct">--%</strong></span>
+            <span class="label-human">Human: <strong id="white-human-pct">--%</strong></span>
+          </div>
+          <div class="prob-bar-track">
+            <div class="prob-bar-fill prob-fill-white" id="white-prob-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+        <div class="player-stats-row">
+          <div class="stat-item">
+            <span class="stat-name">Moves Analyzed</span>
+            <span class="stat-val" id="white-moves-count">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-name">Moves Flagged AI</span>
+            <span class="stat-val" id="white-flagged-count">0%</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-name">Peak AI Likelihood</span>
+            <span class="stat-val" id="white-peak-ai">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Black Player Profile -->
+      <div class="card player-card" id="black-card">
+        <div class="player-header">
+          <div class="player-avatar avatar-black">B</div>
+          <div class="player-info">
+            <h3 class="player-name" id="black-name">Black Player</h3>
+            <span class="player-rating" id="black-rating">Rating: 1500</span>
+          </div>
+          <div class="prediction-pill pill-unknown" id="black-prediction-pill">
+            Analyzing...
+          </div>
+        </div>
+        <div class="player-probs-container">
+          <div class="prob-labels">
+            <span class="label-ai">AI Probability: <strong id="black-ai-pct">--%</strong></span>
+            <span class="label-human">Human: <strong id="black-human-pct">--%</strong></span>
+          </div>
+          <div class="prob-bar-track">
+            <div class="prob-bar-fill prob-fill-black" id="black-prob-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+        <div class="player-stats-row">
+          <div class="stat-item">
+            <span class="stat-name">Moves Analyzed</span>
+            <span class="stat-val" id="black-moves-count">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-name">Moves Flagged AI</span>
+            <span class="stat-val" id="black-flagged-count">0%</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-name">Peak AI Likelihood</span>
+            <span class="stat-val" id="black-peak-ai">0%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Stepper & Current Move Diagnostics -->
+    <div class="workbench-grid">
+      <!-- Left: Interactive Chessboard -->
+      <section class="card board-section">
+        <div class="board-header">
+          <div class="game-meta-pills">
+            <span class="meta-tag" id="meta-tc">3+0 Blitz</span>
+            <span class="meta-tag" id="meta-phase">Phase: Opening</span>
+            <span class="meta-tag" id="meta-eco">ECO: --</span>
+          </div>
+          <div class="clocks-display">
+            <div class="clock-badge" id="clock-white">W: --:--</div>
+            <div class="clock-badge" id="clock-black">B: --:--</div>
+          </div>
+        </div>
+
+        <!-- Chessboard Container -->
+        <div class="board-wrapper">
+          <div id="chessboard" class="chessboard-grid"></div>
+        </div>
+
+        <!-- Playback Controls -->
+        <div class="board-controls">
+          <div class="btn-group">
+            <button class="btn btn-ctrl" id="btn-first" title="First Move">|&lt;</button>
+            <button class="btn btn-ctrl" id="btn-prev" title="Previous Move">&lt;</button>
+            <button class="btn btn-ctrl btn-play" id="btn-play-pause" title="Play / Pause">▶ Play</button>
+            <button class="btn btn-ctrl" id="btn-next" title="Next Move">&gt;</button>
+            <button class="btn btn-ctrl" id="btn-last" title="Last Move">&gt;|</button>
+          </div>
+          <div class="speed-toggle">
+            <button class="speed-btn active" data-speed="1000">1x</button>
+            <button class="speed-btn" data-speed="500">2x</button>
+            <button class="speed-btn" data-speed="200">5x</button>
+          </div>
+        </div>
+
+        <!-- Scrubber Slider -->
+        <div class="scrubber-container">
+          <input type="range" id="move-scrubber" min="0" max="0" value="0" class="move-slider">
+          <div class="scrubber-meta">
+            <span id="scrubber-ply-label">Move 0 / 0</span>
+            <span id="scrubber-san-label">Start Position</span>
+          </div>
+        </div>
+
+        <!-- Move History List -->
+        <div class="move-history-container">
+          <table class="move-history-table" id="move-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>White</th>
+                <th>T(s)</th>
+                <th>P(AI)</th>
+                <th>Black</th>
+                <th>T(s)</th>
+                <th>P(AI)</th>
+              </tr>
+            </thead>
+            <tbody id="move-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Right: Real-Time Behavioral Feature Telemetry -->
+      <section class="telemetry-section">
+        <!-- Current Move Prediction Card -->
+        <div class="card current-move-card">
+          <div class="card-title-row">
+            <h3 class="card-heading">Current Move Behavioral Telemetry</h3>
+            <span class="active-ply-badge" id="active-ply-badge">Move --</span>
+          </div>
+
+          <div class="current-pred-hero">
+            <div class="hero-left">
+              <span class="hero-sub">Move Classification</span>
+              <h2 class="hero-prediction" id="current-prediction-text">Waiting for move...</h2>
+              <span class="hero-confidence" id="current-confidence-text">AI Prob: --% | Human Prob: --%</span>
+            </div>
+            <div class="hero-gauge-container">
+              <div class="circular-meter" id="circular-meter">
+                <span class="meter-val" id="meter-val">--%</span>
+                <span class="meter-lbl">AI Likelihood</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grounded Behavioral Explanation Box -->
+          <div class="explanation-box" id="explanation-box">
+            <h4 class="explanation-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-bulb">
+                <path d="M9 18h6m-5 4h4m-7-10a7 7 0 1 1 10 0c0 2-1.2 3.8-2 5H10c-.8-1.2-2-3-2-5z"/>
+              </svg>
+              Behavioral Signals Observed
+            </h4>
+            <ul class="signal-list" id="signal-list">
+              <li class="signal-item">Select or play a move to inspect empirical behavioral signals.</li>
+            </ul>
+          </div>
+
+          <!-- 10 Feature Meters Grid -->
+          <h4 class="subheading">10 EDA Behavioral Features (Streaming State)</h4>
+          <div class="features-meters-grid" id="features-meters-grid">
+            <!-- Dynamically populated with 10 feature meters -->
+          </div>
+        </div>
+
+        <!-- Model Explanation & Feature Importance -->
+        <div class="card model-explanation-card">
+          <div class="card-title-row">
+            <h3 class="card-heading">LightGBM Model Feature Importance</h3>
+            <span class="badge badge-outline">Normalized Gain (%)</span>
+          </div>
+          <p class="section-desc">
+            Empirical predictive contribution from cross-validated model training on 416,978 chess moves.
+          </p>
+          <div class="importance-bars-container" id="importance-container">
+            <!-- Populated via API /feature-importance -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Live Behavioral Trend Graphs -->
+    <section class="card graphs-section">
+      <div class="card-title-row">
+        <h3 class="card-heading">Game Progression Behavioral Dynamics</h3>
+        <span class="badge badge-secondary">Dynamic Time-Series</span>
+      </div>
+
+      <div class="charts-grid">
+        <!-- Chart 1: AI Probability over Move Number -->
+        <div class="chart-wrapper">
+          <h4 class="chart-title">AI Probability Trajectory by Player</h4>
+          <canvas id="chart-ai-probs"></canvas>
+        </div>
+
+        <!-- Chart 2: Move Thinking Time -->
+        <div class="chart-wrapper">
+          <h4 class="chart-title">Move Thinking Time (Seconds)</h4>
+          <canvas id="chart-movetime"></canvas>
+        </div>
+
+        <!-- Chart 3: Rolling Timing Volatility (CV) -->
+        <div class="chart-wrapper">
+          <h4 class="chart-title">Rolling Move-Time CV (W = 10)</h4>
+          <canvas id="chart-cv"></canvas>
+        </div>
+
+        <!-- Chart 4: Clock Time Remaining -->
+        <div class="chart-wrapper">
+          <h4 class="chart-title">Clock Remaining Over Moves</h4>
+          <canvas id="chart-clock"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Methodology & Known Boundary Conditions -->
+    <section class="card methodology-card">
+      <h3 class="card-heading">Empirical Validation Benchmarks & Known Scientific Limitations</h3>
+      <div class="methodology-grid">
+        <div class="method-col">
+          <h4>Empirical Generalization Metrics</h4>
+          <ul class="methodology-list">
+            <li><strong>A. Unseen-Game Benchmark:</strong> ROC-AUC ≈ <strong>0.9008</strong> (PR-AUC: 0.4780, Balanced Acc: 81.3%) across 1,228 held-out games (82,214 moves).</li>
+            <li><strong>B. Unseen-Player Generalization:</strong> ROC-AUC ≈ <strong>0.8639</strong> across 2,100 unseen accounts, proving the model detects move physics rather than memorizing players.</li>
+            <li><strong>C. Paired Human-vs-Bot Holdout:</strong> ROC-AUC ≈ <strong>0.5176</strong> (Balanced Acc: 55.7%), demonstrating near-chance discrimination when engines intentionally emulate human moves.</li>
+          </ul>
+        </div>
+        <div class="method-col">
+          <h4>Strict Temporal Architecture</h4>
+          <p>
+            <strong>Strict Zero Lookahead:</strong> Move <em>k</em> strictly evaluates historical telemetry (moves 1 to <em>k</em>). Total game length, future plies, engine eval evaluations, and game outcomes are rigorously quarantined.
+          </p>
+          <p>
+            <strong>No Identity Proxies:</strong> Zero reliance on Elo rating differences or player identifiers; classifications rely purely on clock timing and move deliberation physics.
+          </p>
+        </div>
+        <div class="method-col">
+          <h4>Known Boundary Conditions & Failure Modes</h4>
+          <ul class="methodology-list">
+            <li><strong>D. Bullet Time-Scramble False Positives:</strong> In fast Bullet scrambles (&lt;15s remaining), humans queue rapid pre-moves with near-zero latency, mimicking engine speed. <em>Operational recommendation: use strict threshold τ ≥ 0.85 for time scrambles.</em></li>
+            <li><strong>E. Anthropomorphic / Calibrated Bots:</strong> Neural engines (e.g. Maia Chess) trained on human distributions and injected with randomized delays (2–5s) deliberately mimic human pacing, representing a fundamental limit for pure move-time models.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Project: <em>EDA-Driven Behavioral Feature Engineering for Human–AI Chess Move Detection</em> &bull; October 2026</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

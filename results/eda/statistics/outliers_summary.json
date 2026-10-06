@@ -1,0 +1,26 @@
+{
+  "move_time_gt_60s": {
+    "total_count": 928,
+    "human_count": 894,
+    "ai_count": 34,
+    "human_pct_of_total": 96.34,
+    "phases": {
+      "Middlegame": 662,
+      "Opening": 244,
+      "Endgame": 22
+    },
+    "speeds": {
+      "Rapid": 528,
+      "Blitz": 243,
+      "Classical": 153,
+      "Bullet": 4
+    },
+    "max_time_human": 658.0,
+    "max_time_ai": 158.0
+  },
+  "move_time_gt_120s": {
+    "total_count": 131,
+    "human_count": 126,
+    "ai_count": 5
+  }
+}

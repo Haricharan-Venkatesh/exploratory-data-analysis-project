@@ -1,0 +1,38 @@
+[Event "Rated Bullet game"]
+[Site "https://lichess.org/S82ZcFF4"]
+[Date "2024.01.01"]
+[Round "-"]
+[White "Fruity23"]
+[Black "Pure-Eman"]
+[Result "1/2-1/2"]
+[UTCDate "2024.01.01"]
+[UTCTime "00:01:09"]
+[WhiteElo "2937"]
+[BlackElo "2936"]
+[WhiteRatingDiff "+0"]
+[BlackRatingDiff "+0"]
+[WhiteTitle "BOT"]
+[BlackTitle "BOT"]
+[ECO "C65"]
+[Opening "Ruy Lopez: Berlin Defense"]
+[TimeControl "120+1"]
+[Termination "Normal"]
+
+1. e4 { [%clk 0:02:00] } 1... e5 { [%clk 0:02:00] } 2. Nf3 { [%clk 0:02:01] }
+2... Nc6 { [%clk 0:02:01] } 3. Bb5 { [%clk 0:02:02] } 3... Nf6
+{ [%clk 0:02:02] } 4. d3 { [%clk 0:02:03] } 4... Bc5 { [%clk 0:02:03] } 5. Bxc6
+{ [%clk 0:02:04] } 5... dxc6 { [%clk 0:02:04] } 6. O-O { [%clk 0:02:05] } 6...
+Nd7 { [%clk 0:02:05] } 7. Nbd2 { [%clk 0:02:06] } 7... O-O { [%clk 0:02:06] }
+8. Nc4 { [%clk 0:02:07] } 8... Re8 { [%clk 0:02:07] } 9. a4 { [%clk 0:02:08] }
+9... a5 { [%clk 0:02:08] } 10. Be3 { [%clk 0:02:09] } 10... Bb4
+{ [%clk 0:02:09] } 11. Bd2 { [%clk 0:02:09] } 11... b6 { [%clk 0:02:10] } 12.
+Kh1 { [%clk 0:02:10] } 12... f6 { [%clk 0:02:11] } 13. Qe1 { [%clk 0:02:11] }
+13... Bc5 { [%clk 0:02:12] } 14. Nh4 { [%clk 0:02:12] } 14... Nf8
+{ [%clk 0:02:13] } 15. f4 { [%clk 0:02:13] } 15... exf4 { [%clk 0:02:14] } 16.
+Bxf4 { [%clk 0:02:14] } 16... Be6 { [%clk 0:02:15] } 17. b3 { [%clk 0:02:14] }
+17... Qd7 { [%clk 0:02:15] } 18. Bd2 { [%clk 0:02:15] } 18... Bxc4
+{ [%clk 0:02:07] } 19. bxc4 { [%clk 0:02:11] } 19... Ng6 { [%clk 0:02:08] } 20.
+Nf5 { [%clk 0:02:10] } 20... Ne7 { [%clk 0:02:08] } 21. Nh4 { [%clk 0:02:08] }
+21... Ng6 { [%clk 0:02:07] } 22. Nf5 { [%clk 0:02:07] } 22... Ne7
+{ [%clk 0:02:06] } 23. Nh4 { [%clk 0:02:05] } 23... Ng6 { [%clk 0:02:06] }
+1/2-1/2

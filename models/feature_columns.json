@@ -1,0 +1,12 @@
+[
+  "consecutive_fast_moves",
+  "premove_rate_10",
+  "cumulative_premove_rate",
+  "current_endgame_clock_ratio",
+  "phase_deliberation_ratio",
+  "move_time_cv_10",
+  "time_pressure_jitter",
+  "relative_move_time",
+  "time_spent_ratio",
+  "tank_move_count_10"
+]

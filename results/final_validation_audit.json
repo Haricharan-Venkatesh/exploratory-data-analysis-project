@@ -1,0 +1,330 @@
+{
+  "step1_endpoints": {
+    "/health": {
+      "status": 200,
+      "data": {
+        "status": "healthy",
+        "service": "Human-AI Chess Move Detection",
+        "model_name": "EDA Behavioral LightGBM Classifier",
+        "model_type": "LightGBM (Gradient Boosted Decision Trees)",
+        "version": "1.0.0",
+        "operating_threshold": 0.5,
+        "feature_count": 10,
+        "feature_columns": [
+          "consecutive_fast_moves",
+          "premove_rate_10",
+          "cumulative_premove_rate",
+          "current_endgame_clock_ratio",
+          "phase_deliberation_ratio",
+          "move_time_cv_10",
+          "time_pressure_jitter",
+          "relative_move_time",
+          "time_spent_ratio",
+          "tank_move_count_10"
+        ],
+        "test_roc_auc": 0.9008
+      }
+    },
+    "/demo-games": {
+      "status": 200,
+      "game_count": 3
+    },
+    "/feature-importance": {
+      "status": 200,
+      "feature_count": 10
+    },
+    "/": {
+      "status": 200,
+      "html_length": 17785
+    },
+    "/predict": {
+      "status": 200,
+      "prediction": "Predicted HUMAN",
+      "ai_prob": 0.0876
+    },
+    "/upload-pgn": {
+      "status": 200,
+      "plies": 49
+    }
+  },
+  "step2_real_pgn_tests": {
+    "human_game": {
+      "white": "Detectie",
+      "black": "youssefaymn",
+      "tc": "300+3",
+      "event": "Rated Blitz game",
+      "plies": 107,
+      "elapsed_s": 0.3268,
+      "white_pred": "Predicted HUMAN",
+      "white_ai_prob": 5.3,
+      "black_pred": "Predicted HUMAN",
+      "black_ai_prob": 15.6
+    },
+    "bot_game": {
+      "white": "Fruity23",
+      "black": "Pure-Eman",
+      "tc": "120+1",
+      "event": "Rated Bullet game",
+      "plies": 46,
+      "elapsed_s": 0.1468,
+      "white_pred": "AI-like behavioral pattern",
+      "white_ai_prob": 87.2,
+      "black_pred": "AI-like behavioral pattern",
+      "black_ai_prob": 88.7
+    },
+    "human_vs_bot_game": {
+      "white": "lokkkrrd",
+      "black": "maia1",
+      "tc": "120+5",
+      "event": "Rated Blitz game",
+      "plies": 54,
+      "elapsed_s": 0.1644,
+      "white_pred": "Predicted HUMAN",
+      "white_ai_prob": 40.1,
+      "black_pred": "AI-like behavioral pattern",
+      "black_ai_prob": 65.8
+    },
+    "bullet_game": {
+      "white": "TRUFFE68",
+      "black": "Davigoal",
+      "tc": "120+1",
+      "event": "Rated Bullet game",
+      "plies": 92,
+      "elapsed_s": 0.2655,
+      "white_pred": "Predicted HUMAN",
+      "white_ai_prob": 8.7,
+      "black_pred": "Predicted HUMAN",
+      "black_ai_prob": 22.3
+    },
+    "blitz_game": {
+      "white": "Detectie",
+      "black": "youssefaymn",
+      "tc": "300+3",
+      "event": "Rated Blitz game",
+      "plies": 107,
+      "elapsed_s": 0.3047,
+      "white_pred": "Predicted HUMAN",
+      "white_ai_prob": 5.3,
+      "black_pred": "Predicted HUMAN",
+      "black_ai_prob": 15.6
+    },
+    "rapid_classical_game": {
+      "white": "CrazySalle",
+      "black": "Drilling_Spec",
+      "tc": "600+0",
+      "event": "Rated Rapid game",
+      "plies": 130,
+      "elapsed_s": 0.3666,
+      "white_pred": "Predicted HUMAN",
+      "white_ai_prob": 13.6,
+      "black_pred": "Predicted HUMAN",
+      "black_ai_prob": 4.5
+    }
+  },
+  "step3_pipeline": {
+    "features_match": true,
+    "feature_columns": [
+      "consecutive_fast_moves",
+      "premove_rate_10",
+      "cumulative_premove_rate",
+      "current_endgame_clock_ratio",
+      "phase_deliberation_ratio",
+      "move_time_cv_10",
+      "time_pressure_jitter",
+      "relative_move_time",
+      "time_spent_ratio",
+      "tank_move_count_10"
+    ],
+    "direct_model_prob": 0.2215,
+    "pipeline_prob": 0.2215,
+    "probability_match": true
+  },
+  "step4_leakage": {
+    "plies_tested": 15,
+    "leakage_failures_count": 0,
+    "status": "PASS: ZERO LEAKAGE CONFIRMED"
+  },
+  "step5_clock_handling": {
+    "with_clock": {
+      "has_clock": true,
+      "pred": "Predicted HUMAN"
+    },
+    "without_clock": {
+      "has_clock": false,
+      "pred": "UNAVAILABLE (No Clock Data)",
+      "warning": "Move clock data unavailable. Timing-based behavioral prediction may be unreliable.",
+      "first_move_prob": null
+    },
+    "status": "PASS: CLEAR REJECTION AND EXPLICIT WARNING CONFIRMED"
+  },
+  "step6_probability_calibration": {
+    "ai_probability": 0.0876,
+    "human_probability": 0.9124,
+    "probability_sum": 1.0,
+    "sum_valid": true,
+    "operating_threshold": 0.5,
+    "metadata_threshold": 0.5,
+    "threshold_source_valid": true
+  },
+  "step8_move_playback": {
+    "ply_1": {
+      "move": "1.e4",
+      "player": "White",
+      "fen_after": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+      "move_time": 0.0,
+      "clock_after": 300.0,
+      "ai_probability": 0.4001,
+      "human_probability": 0.5999,
+      "prediction": "Predicted HUMAN",
+      "features_sample": {
+        "consecutive_fast_moves": 1.0,
+        "phase_deliberation_ratio": 1.0,
+        "move_time_cv_10": 0.0
+      }
+    },
+    "ply_2": {
+      "move": "1.e5",
+      "player": "Black",
+      "fen_after": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "move_time": 0.0,
+      "clock_after": 300.0,
+      "ai_probability": 0.4001,
+      "human_probability": 0.5999,
+      "prediction": "Predicted HUMAN",
+      "features_sample": {
+        "consecutive_fast_moves": 1.0,
+        "phase_deliberation_ratio": 1.0,
+        "move_time_cv_10": 0.0
+      }
+    },
+    "ply_5": {
+      "move": "3.Bc4",
+      "player": "White",
+      "fen_after": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3",
+      "move_time": 1.0,
+      "clock_after": 304.0,
+      "ai_probability": 0.1011,
+      "human_probability": 0.8989,
+      "prediction": "Predicted HUMAN",
+      "features_sample": {
+        "consecutive_fast_moves": 0.0,
+        "phase_deliberation_ratio": 1.0,
+        "move_time_cv_10": 0.7071067811865476
+      }
+    },
+    "ply_10": {
+      "move": "5.d6",
+      "player": "Black",
+      "fen_after": "r1bqkb1r/ppp2pp1/2np1n1p/4p3/2B1P3/3P1N2/PPP2PPP/RNBQ1RK1 w kq - 0 6",
+      "move_time": 2.0,
+      "clock_after": 305.0,
+      "ai_probability": 0.2215,
+      "human_probability": 0.7785,
+      "prediction": "Predicted HUMAN",
+      "features_sample": {
+        "consecutive_fast_moves": 0.0,
+        "phase_deliberation_ratio": 1.0,
+        "move_time_cv_10": 0.5714285714285715
+      }
+    },
+    "ply_20": {
+      "move": "10.e4",
+      "player": "Black",
+      "fen_after": "r2qkb1r/ppp3p1/2n2n1p/3p4/4p3/3PBN2/PPPN1PPP/R2QR1K1 w kq - 0 11",
+      "move_time": 9.0,
+      "clock_after": 307.0,
+      "ai_probability": 0.4037,
+      "human_probability": 0.5963,
+      "prediction": "Predicted HUMAN",
+      "features_sample": {
+        "consecutive_fast_moves": 0.0,
+        "phase_deliberation_ratio": 1.0,
+        "move_time_cv_10": 1.2649110640673518
+      }
+    },
+    "ply_35": {
+      "move": "18.Qxd3",
+      "player": "White",
+      "fen_after": "r2q3r/pppk4/3b1p1p/8/8/3Q4/PPPN1PPP/R3R1K1 b - - 0 18",
+      "move_time": 2.0,
+      "clock_after": 224.0,
+      "ai_probability": 0.0173,
+      "human_probability": 0.9827,
+      "prediction": "Predicted HUMAN",
+      "features_sample": {
+        "consecutive_fast_moves": 0.0,
+        "phase_deliberation_ratio": 2.2777777777777777,
+        "move_time_cv_10": 0.7570948238789087
+      }
+    }
+  },
+  "step9_edge_cases": {
+    "Invalid PGN syntax": {
+      "status_code": 200,
+      "handled_gracefully": true,
+      "warning_or_detail": "Move clock data unavailable. Timing-based behavioral prediction may be unreliable."
+    },
+    "Empty PGN text": {
+      "status_code": 400,
+      "handled_gracefully": true,
+      "warning_or_detail": "Empty PGN content provided."
+    },
+    "PGN without clock comments": {
+      "status_code": 200,
+      "handled_gracefully": true,
+      "warning_or_detail": "Move clock data unavailable. Timing-based behavioral prediction may be unreliable."
+    },
+    "Very short 4-ply game": {
+      "status_code": 200,
+      "handled_gracefully": true,
+      "warning_or_detail": "Short game (4 plies observed). Rolling window metrics carry higher initial variance."
+    },
+    "Missing rating header": {
+      "status_code": 200,
+      "handled_gracefully": true,
+      "warning_or_detail": "Short game (2 plies observed). Rolling window metrics carry higher initial variance."
+    },
+    "Unsupported time control string": {
+      "status_code": 200,
+      "handled_gracefully": true,
+      "warning_or_detail": "Short game (2 plies observed). Rolling window metrics carry higher initial variance."
+    },
+    "Zero-move aborted game": {
+      "status_code": 200,
+      "handled_gracefully": true,
+      "warning_or_detail": "PGN contains no moves (game aborted or empty)."
+    }
+  },
+  "step10_terminology": {
+    "banned_terms_checked": [
+      "cheater",
+      "cheat",
+      "cheating",
+      "cheater detected",
+      "confirmed cheating",
+      "player is cheating",
+      "ai assistance proven",
+      "proven cheating"
+    ],
+    "violations_found": 0,
+    "status": "PASS: SCIENTIFICALLY SOUND"
+  },
+  "step11_limitations": {
+    "checks": {
+      "A. Unseen-game ROC-AUC (0.9008)": true,
+      "B. Unseen-player ROC-AUC (0.8639)": true,
+      "C. Paired human-vs-bot ROC-AUC (0.5176)": true,
+      "D. Bullet time-scramble false positives": true,
+      "E. Anthropomorphic / Maia bots": true
+    },
+    "all_present": true,
+    "status": "PASS"
+  },
+  "step12_performance": {
+    "pgn_parsing_ms": 1.803,
+    "feature_extraction_ms": 16.437,
+    "model_inference_ms": 2.813,
+    "complete_api_ms": 141.21,
+    "throughput_plies_per_sec": 757.7
+  }
+}

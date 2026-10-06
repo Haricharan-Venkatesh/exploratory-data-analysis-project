@@ -1,0 +1,39 @@
+{
+  "false_positives": {
+    "count": 8303,
+    "mean_move_time": 2.5,
+    "median_move_time": 1.0,
+    "zero_move_pct": 37.77,
+    "mean_consecutive_fast": 0.973,
+    "speed_breakdown": {
+      "Bullet": 5015,
+      "Blitz": 2540,
+      "Rapid": 609,
+      "UltraBullet": 120,
+      "Classical": 19
+    },
+    "phase_breakdown": {
+      "Middlegame": 4778,
+      "Opening": 2364,
+      "Endgame": 1161
+    }
+  },
+  "false_negatives": {
+    "count": 691,
+    "mean_move_time": 3.009,
+    "median_move_time": 2.0,
+    "zero_move_pct": 19.1,
+    "mean_consecutive_fast": 0.21,
+    "speed_breakdown": {
+      "Bullet": 311,
+      "Blitz": 288,
+      "Rapid": 90,
+      "Classical": 2
+    },
+    "phase_breakdown": {
+      "Middlegame": 297,
+      "Opening": 198,
+      "Endgame": 196
+    }
+  }
+}

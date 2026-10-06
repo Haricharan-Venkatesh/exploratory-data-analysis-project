@@ -1,0 +1,17 @@
+=================================================================
+Lichess Open Database — Human vs Bot Game Sample
+=================================================================
+
+Source: https://database.lichess.org/standard/lichess_db_standard_rated_2024-01.pgn.zst
+License: Creative Commons CC0 (public domain)
+Strategy: Streamed first 150 MB compressed
+
+Files:
+  lichess_human_human_games.pgn: 6.7 MB
+  lichess_human_vs_bot_games.pgn: 0.2 MB
+  lichess_bot_vs_bot_games.pgn: 0.4 MB
+
+Labeling:
+  Human-vs-Human: Both players have no BOT title -> pure HUMAN behavior
+  Human-vs-Bot: One player has [WhiteTitle/BlackTitle 'BOT'] -> known labels per player
+  Bot-vs-Bot: Both players are BOTs -> pure AI behavior

@@ -1,0 +1,14 @@
+feature,category,frequency,percentage
+game_phase,Middlegame,236569,56.73
+game_phase,Opening,118693,28.47
+game_phase,Endgame,61716,14.8
+speed_category,Blitz,207540,49.77
+speed_category,Bullet,154584,37.07
+speed_category,Rapid,50159,12.03
+speed_category,UltraBullet,2824,0.68
+speed_category,Classical,1871,0.45
+game_result,1-0,197833,47.44
+game_result,0-1,189064,45.34
+game_result,1/2-1/2,30081,7.21
+player_color,White,210074,50.38
+player_color,Black,206904,49.62

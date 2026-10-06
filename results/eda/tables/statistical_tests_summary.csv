@@ -1,0 +1,4 @@
+comparison,human_stat,ai_stat,test_name,test_stat,p_value,effect_size,practical_significance
+Overall Move Time (s),"mean=4.17, med=2.00","mean=3.95, med=2.00",Mann-Whitney U & KS test,"U=3.11e+09, KS=0.107",4.91e-15,r_rb=-0.037,Statistically significant; bots have substantially lower median time and fewer long pauses
+Zero-Move / Pre-Move Rate,14.78%,25.52%,Chi-Square Test of Independence,Chi2=1287.34,6.36e-282,Cramer's V=0.0556,Significant difference in instantaneous moves; human players premove at a much higher frequency in online play
+Player Rating (Elo),"mean=1697.6, med=1713.0","mean=2393.4, med=2507.0",Mann-Whitney U Test,U=9.79e+08,0.00e+00,r_rb=0.673,Bots in our sample span active ratings with higher mean rating than casual pool

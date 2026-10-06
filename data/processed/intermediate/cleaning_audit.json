@@ -1,0 +1,56 @@
+{
+  "removal_rules": [
+    {
+      "rule_id": "RULE_1_DUPLICATE_GAME",
+      "condition": "Exact same game_id (from Lichess Site URL) already ingested from an earlier raw file",
+      "action": "Retain first occurrence, discard redundant instances",
+      "affected_count": 3021,
+      "reason": "Eliminate redundant game blocks present across multiple sampled raw files."
+    },
+    {
+      "rule_id": "RULE_2_ABORTED_GAME",
+      "condition": "Game contains 0 moves (ply count == 0)",
+      "action": "Exclude from move-level dataset",
+      "affected_count": 12,
+      "reason": "Game was aborted or forfeited before move 1; contains no behavioral move data."
+    },
+    {
+      "rule_id": "RULE_3_CORRESPONDENCE_GAME",
+      "condition": "TimeControl is '-' (untimed correspondence game)",
+      "action": "Exclude from real-time move dataset",
+      "affected_count": 8,
+      "reason": "Untimed correspondence chess lacks real-time clocks and [%clk] annotations."
+    },
+    {
+      "rule_id": "RULE_4_INVALID_MOVE_TIME",
+      "condition": "Calculated move_time < 0s (opponent gave +15s or lag compensation restored time)",
+      "action": "Keep move row, set move_time to NaN",
+      "affected_count": 41,
+      "reason": "Clock addition makes elapsed thinking time uncomputable; do not fabricate time."
+    },
+    {
+      "rule_id": "RULE_5_MISSING_CLOCK_ANNOTATION",
+      "condition": "Individual move missing [%clk] annotation",
+      "action": "Keep move row, set move_time to NaN and clock_after_move to NaN",
+      "affected_count": 0,
+      "reason": "Clock time missing; do not impute behavioral time."
+    }
+  ],
+  "game_counts": {
+    "raw_game_instances": 9195,
+    "unique_games_ingested": 6174,
+    "duplicate_game_instances_discarded": 3021,
+    "zero_move_aborted_games_discarded": 12,
+    "correspondence_games_discarded": 8,
+    "final_valid_games": 6154
+  },
+  "move_counts": {
+    "total_final_moves": 416978,
+    "human_moves": 402085,
+    "ai_moves": 14893,
+    "moves_with_valid_time": 416937,
+    "moves_with_missing_time": 41,
+    "moves_with_zero_time_premoves": 63223,
+    "moves_with_positive_time": 353714
+  }
+}

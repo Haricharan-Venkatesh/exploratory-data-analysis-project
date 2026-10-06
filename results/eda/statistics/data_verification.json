@@ -1,0 +1,32 @@
+{
+  "total_moves": 416978,
+  "total_columns": 18,
+  "columns": [
+    "game_id",
+    "player_id",
+    "player_color",
+    "move_number",
+    "move",
+    "move_time",
+    "player_rating",
+    "game_phase",
+    "position",
+    "label",
+    "ply",
+    "clock_after_move",
+    "time_control",
+    "speed_category",
+    "opponent_id",
+    "opponent_rating",
+    "game_result",
+    "eco"
+  ],
+  "human_moves": 402085,
+  "ai_moves": 14893,
+  "human_move_pct": 96.43,
+  "ai_move_pct": 3.57,
+  "unique_games": 6154,
+  "unique_players": 10503,
+  "missing_move_times": 41,
+  "missing_move_time_pct": 0.0098
+}

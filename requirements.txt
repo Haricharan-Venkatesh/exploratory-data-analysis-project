@@ -1,0 +1,23 @@
+# Chess AI Detection - Production Dependencies
+# ===============================================
+
+# Core Tabular & Machine Learning
+numpy>=1.26.0
+pandas>=2.1.0
+scikit-learn>=1.4.0
+lightgbm>=4.3.0
+joblib>=1.3.0
+shap>=0.45.0
+
+# Chess Domain & PGN Parsing
+python-chess>=1.999
+
+# API & Web Application Serving
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+pydantic>=2.6.0
+python-multipart>=0.0.9
+
+# Visualization & Reporting
+matplotlib>=3.8.0
+seaborn>=0.13.0
