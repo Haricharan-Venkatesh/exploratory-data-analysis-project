@@ -1,0 +1,9 @@
+[Event "No Moves Test"]
+[Site "Test"]
+[Date "2024.01.01"]
+[Round "1"]
+[White "Player A"]
+[Black "Player B"]
+[Result "*"]
+
+*

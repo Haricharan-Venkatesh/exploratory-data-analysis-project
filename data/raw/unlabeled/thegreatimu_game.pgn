@@ -1,0 +1,32 @@
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.10.15"]
+[Round "-"]
+[White "Engaliawad"]
+[Black "TheGreatIMU"]
+[Result "0-1"]
+[CurrentPosition "4r1k1/ppp2ppp/8/1P6/6P1/2p5/P3q1PP/4K2R w K - 0 23"]
+[Timezone "UTC"]
+[ECO "C20"]
+[ECOUrl "https://www.chess.com/openings/Kings-Pawn-Opening-Leonardis-Variation"]
+[UTCDate "2026.10.15"]
+[UTCTime "15:26:59"]
+[WhiteElo "758"]
+[BlackElo "962"]
+[TimeControl "600"]
+[Termination "TheGreatIMU won by checkmate"]
+[StartTime "15:26:59"]
+[EndDate "2026.10.15"]
+[EndTime "15:43:47"]
+[Link "https://www.chess.com/analysis/game/live/185375209066/review?move=18"]
+[WhiteUrl "https://www.chess.com/bundles/web/images/noavatar_l.84a92436.gif"]
+[WhiteCountry "178"]
+[WhiteTitle ""]
+[BlackUrl "https://www.chess.com/bundles/web/images/noavatar_l.84a92436.gif"]
+[BlackCountry "69"]
+[BlackTitle ""]
+
+1. e4 e5 2. d3 Nc6 3. b3 Nf6 4. Nf3 d5 5. exd5 Nxd5 6. Qe2 Bb4+ 7. c3 Nxc3 8.
+Nxc3 Bxc3+ 9. Bd2 Bxa1 10. b4 O-O 11. b5 Nd4 12. Nxd4 exd4 13. Qd1 Bc3 14. Bxc3
+dxc3 15. Qc1 Re8+ 16. Be2 Bg4 17. f3 Qxd3 18. Qd1 Qe3 19. fxg4 Rad8 20. Qc2 Rd2
+21. Qd1 Rxe2+ 22. Qxe2 Qxe2# 0-1

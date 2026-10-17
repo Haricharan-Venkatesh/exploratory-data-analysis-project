@@ -1,0 +1,90 @@
+{
+  "generated_at": "2026-10-17T11:20:36.580263+00:00",
+  "pipeline_version": "2.0.0",
+  "engine_info": {
+    "enabled": true,
+    "engine_name": "Stockfish 19",
+    "stockfish_path": "C:\\stockfish\\stockfish.exe",
+    "depth": 10
+  },
+  "summary": {
+    "total_files_scanned": 4,
+    "total_games_processed": 4,
+    "total_moves_extracted": 181,
+    "total_player_games": 8,
+    "categories": {
+      "human_games": {
+        "files": 2,
+        "games": 2,
+        "moves": 78
+      },
+      "engine_generated_games": {
+        "files": 1,
+        "games": 1,
+        "moves": 51
+      },
+      "unlabeled": {
+        "files": 1,
+        "games": 1,
+        "moves": 52
+      }
+    }
+  },
+  "provenance_audit_summary": {
+    "verified_historical_games": 2,
+    "illustrative_unverified_engine_games": 1,
+    "synthetic_demonstration_games": 1,
+    "research_readiness": "Demonstration pipeline only. Not suitable for training machine learning models or claiming human/AI discrimination without ingesting a verified, balanced research corpus."
+  },
+  "files_processed": [
+    {
+      "file": "human_games/immortal_game.pgn",
+      "category": "human_games",
+      "games_processed": 1,
+      "moves_extracted": 45,
+      "provenance_audit": {
+        "provenance_status": "verified_historical_human",
+        "authenticity": "Independently verified",
+        "historical_reference": "Adolf Anderssen vs. Lionel Kieseritzky (London, 21 June 1851). Extensively documented in chess literature and tournament records (e.g. Chessgames ID 1018910)."
+      }
+    },
+    {
+      "file": "human_games/opera_game_1858.pgn",
+      "category": "human_games",
+      "games_processed": 1,
+      "moves_extracted": 33,
+      "provenance_audit": {
+        "provenance_status": "verified_historical_human",
+        "authenticity": "Independently verified",
+        "historical_reference": "Paul Morphy vs. Duke Karl of Brunswick and Count Isouard (Paris, 2 November 1858). Widely documented in chess history (e.g. Chessgames ID 1233404)."
+      }
+    },
+    {
+      "file": "engine_generated_games/tcec_engine_game.pgn",
+      "category": "engine_generated_games",
+      "games_processed": 1,
+      "moves_extracted": 51,
+      "provenance_audit": {
+        "provenance_status": "illustrative_engine_demonstration_unverified",
+        "authenticity": "Unverified demonstration data",
+        "historical_reference": "Headers mention TCEC Season 20 Superfinal, but moves do not match the historical TCEC Season 20 Superfinal Game 1. Retained as an illustrative demonstration game for pipeline verification only."
+      }
+    },
+    {
+      "file": "unlabeled/casual_game.pgn",
+      "category": "unlabeled",
+      "games_processed": 1,
+      "moves_extracted": 52,
+      "provenance_audit": {
+        "provenance_status": "synthetic_programmatic_demonstration",
+        "authenticity": "Programmatically constructed test game",
+        "historical_reference": "Created programmatically during development for pipeline testing and unrated move handling. Not a verified real-world game."
+      }
+    }
+  ],
+  "skipped_and_errors": [],
+  "outputs": {
+    "move_level_csv": "data/processed/move_level_features.csv",
+    "player_game_csv": "data/processed/player_game_features.csv"
+  }
+}

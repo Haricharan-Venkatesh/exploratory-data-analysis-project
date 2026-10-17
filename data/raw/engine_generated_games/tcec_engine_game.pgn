@@ -1,0 +1,11 @@
+[Event "TCEC Season 20 Superfinal"]
+[Site "Internet"]
+[Date "2021.02.01"]
+[Round "1"]
+[White "Stockfish 2021"]
+[Black "Leela Chess Zero"]
+[WhiteElo "3550"]
+[BlackElo "3520"]
+[Result "1-0"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bg5 e6 7. f4 Qb6 8. Qd2 Qxb2 9. Rb1 Qa3 10. e5 dxe5 11. fxe5 Nfd7 12. Ne4 h6 13. Bh4 Qxa2 14. Rd1 Qd5 15. Qe3 Qxe5 16. Be2 Bc5 17. Bg3 Bxd4 18. Rxd4 Qa5+ 19. Rd2 O-O 20. Bd6 Rd8 21. Qg3 Nc6 22. Bc7 Qf5 23. Nd6 Qf6 24. Rf1 Qa1+ 25. Rd1 Qa5+ 26. Bxa5 1-0

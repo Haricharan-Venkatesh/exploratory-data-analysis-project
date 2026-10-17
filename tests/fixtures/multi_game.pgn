@@ -1,0 +1,23 @@
+[Event "Game 1: Scholar's Mate"]
+[Site "Test"]
+[Date "2026.01.01"]
+[Round "1"]
+[White "PlayerOne"]
+[Black "PlayerTwo"]
+[WhiteElo "1500"]
+[BlackElo "1450"]
+[Result "1-0"]
+
+1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 4. Qxf7# 1-0
+
+[Event "Game 2: Fool's Mate"]
+[Site "Test"]
+[Date "2026.01.02"]
+[Round "2"]
+[White "PlayerThree"]
+[Black "PlayerFour"]
+[WhiteElo "1300"]
+[BlackElo "1600"]
+[Result "0-1"]
+
+1. f3 e5 2. g4 Qh4# 0-1

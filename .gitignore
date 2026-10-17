@@ -1,0 +1,59 @@
+# =============================================================================
+# Git Ignore Configuration for Chess EDA & Behavioral ML Project
+# =============================================================================
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+.env.virtual/
+
+# Python Bytecode and Interpreter Caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Testing & Coverage Caches
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Environment Variables & Secrets
+.env
+.env.*
+!.env.example
+
+# IDE, OS, & Workspace Metadata
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Private Workspace & Agentic Scratch Artifacts
+.agents/
+.gemini/
+scratch/
+browser/
+*.log
+
+# Generated Pipeline Outputs (reproducible from CLI)
+output/*.csv
+!output/.gitkeep
+
+# Executable Binaries (Stockfish should be installed separately)
+*.exe
+*.dll
+*.dylib
+*.bin

@@ -1,0 +1,13 @@
+[Event "Comments and Variations Test"]
+[Site "Test"]
+[Date "2024.01.01"]
+[Round "1"]
+[White "Player A"]
+[Black "Player B"]
+[WhiteElo "1600"]
+[BlackElo "1600"]
+[Result "1-0"]
+
+1. e4 { This is a comment on e4 } e5 { Black responds }
+2. Nf3 ( 2. f4 { King's Gambit variation - not a mainline move } exf4 ) Nc6
+3. Bb5 { The Ruy Lopez } a6 4. Ba4 Nf6 1-0

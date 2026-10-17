@@ -1,0 +1,80 @@
+{
+  "dataset_name": "ChessFraud",
+  "configuration": "chess_fraud (Controlled-Tournament Benchmark)",
+  "source_url": "https://huggingface.co/datasets/artemlepin/chess-fraud",
+  "citation": "Linich et al. (2026), ChessFraud: Exploring the Capabilities of Human-Aligned Models for Cheating Detection in Online Chess, ACM SIGKDD 2026",
+  "license": "CC BY 4.0",
+  "scope": "Controlled blitz tournament (5+0 time control) with logged Stockfish 15 assistance protocol",
+  "separation_from_synthetic": "Controlled-tournament data is strictly separated from synthetic move substitutions (chess_fraud_synth)",
+  "limitations": [
+    "Covers a controlled cohort of 49 participants playing 5-minute blitz games.",
+    "Labels reflect logged Stockfish 15 hints; other assistance modalities are outside scope.",
+    "Not generalizable to population-wide online chess or classical time controls without caution.",
+    "Statistical estimates from this benchmark must not be used as definitive proof of real-world cheating."
+  ],
+  "summary": {
+    "total_move_rows": 38510,
+    "total_player_games": 1010,
+    "unique_source_games": 505,
+    "unique_physical_matches": 505,
+    "unique_players": 49,
+    "used_decision_points": 28410,
+    "move_level_class_balance": {
+      "fair_moves": 29105,
+      "cheating_moves": 9405,
+      "cheating_move_rate": 0.2442
+    },
+    "player_game_class_balance": {
+      "fair_games": 603,
+      "cheating_games": 407,
+      "cheating_game_rate": 0.403,
+      "majority_class_baseline_accuracy": 0.597
+    },
+    "columns_count": 33,
+    "columns": [
+      "tournament_id",
+      "game_id",
+      "player_id",
+      "opponent_id",
+      "player_color",
+      "player_elo",
+      "opponent_elo",
+      "time_control",
+      "game_result",
+      "half_move",
+      "move_player",
+      "position_before",
+      "position_after",
+      "move_thinking_time",
+      "clock_remaining_time",
+      "is_used",
+      "eval_before",
+      "eval_after",
+      "centipawn_loss",
+      "normalized_centipawn_loss",
+      "move_stockfish_1",
+      "move_stockfish_9",
+      "move_stockfish_15",
+      "move_maia2_2050",
+      "maia2_win_prob_2050",
+      "move_allie_2500",
+      "allie_win_prob_2500",
+      "player_hint_shown",
+      "assistance_search_depth",
+      "assistance_line_rank",
+      "is_cheating_move",
+      "is_cheating_player_game",
+      "is_accused_by_opponent"
+    ],
+    "missing_values_per_column": {
+      "move_stockfish_1": 10100,
+      "move_stockfish_9": 10100,
+      "move_stockfish_15": 10100,
+      "move_maia2_2050": 10100,
+      "maia2_win_prob_2050": 10100,
+      "move_allie_2500": 10100,
+      "allie_win_prob_2500": 10100,
+      "assistance_line_rank": 29105
+    }
+  }
+}

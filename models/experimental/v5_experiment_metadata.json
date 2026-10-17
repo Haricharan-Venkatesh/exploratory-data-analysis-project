@@ -1,0 +1,397 @@
+{
+  "timestamp": "2026-10-17T16:52:22.373458+00:00",
+  "dataset": "ChessFraud Controlled-Tournament Benchmark",
+  "total_plies": 38510,
+  "total_player_games": 1010,
+  "total_physical_matches": 505,
+  "n_splits": 5,
+  "random_state": 42,
+  "baseline_feature_columns": [
+    "mean_centipawn_loss",
+    "std_centipawn_loss",
+    "median_centipawn_loss",
+    "mean_norm_cp_loss",
+    "std_norm_cp_loss",
+    "blunder_rate",
+    "mistake_rate",
+    "inaccuracy_rate",
+    "excellent_rate",
+    "top1_match_rate",
+    "used_mean_cp_loss",
+    "used_blunder_rate",
+    "move_count"
+  ],
+  "complexity_feature_columns": [
+    "unstable_top1_match_rate",
+    "stable_top1_match_rate",
+    "depth_drop_rate",
+    "critical_top1_match_rate",
+    "critical_mean_cp_loss"
+  ],
+  "all_feature_columns": [
+    "mean_centipawn_loss",
+    "std_centipawn_loss",
+    "median_centipawn_loss",
+    "mean_norm_cp_loss",
+    "std_norm_cp_loss",
+    "blunder_rate",
+    "mistake_rate",
+    "inaccuracy_rate",
+    "excellent_rate",
+    "top1_match_rate",
+    "used_mean_cp_loss",
+    "used_blunder_rate",
+    "move_count",
+    "unstable_top1_match_rate",
+    "stable_top1_match_rate",
+    "depth_drop_rate",
+    "critical_top1_match_rate",
+    "critical_mean_cp_loss"
+  ],
+  "comparisons": {
+    "logistic_regression": {
+      "baseline": {
+        "accuracy": 0.7099,
+        "precision": 0.6657,
+        "recall": 0.5627,
+        "f1_score": 0.6099,
+        "roc_auc": 0.7559,
+        "pr_auc": 0.6892,
+        "fold_acc_std": 0.0194,
+        "confusion_matrix": [
+          [
+            488,
+            115
+          ],
+          [
+            178,
+            229
+          ]
+        ],
+        "confusion_matrix_labels": [
+          "Fair (0)",
+          "Assisted (1)"
+        ]
+      },
+      "augmented": {
+        "accuracy": 0.7139,
+        "precision": 0.6756,
+        "recall": 0.5577,
+        "f1_score": 0.611,
+        "roc_auc": 0.7605,
+        "pr_auc": 0.6983,
+        "fold_acc_std": 0.0158,
+        "confusion_matrix": [
+          [
+            494,
+            109
+          ],
+          [
+            180,
+            227
+          ]
+        ],
+        "confusion_matrix_labels": [
+          "Fair (0)",
+          "Assisted (1)"
+        ]
+      },
+      "delta": {
+        "accuracy": 0.004,
+        "precision": 0.0099,
+        "recall": -0.005,
+        "f1_score": 0.0011,
+        "roc_auc": 0.0046,
+        "pr_auc": 0.0091
+      },
+      "fold_metrics_augmented": [
+        {
+          "fold": 1,
+          "accuracy": 0.7327,
+          "precision": 0.6957,
+          "recall": 0.5926,
+          "f1_score": 0.64,
+          "roc_auc": 0.7854,
+          "pr_auc": 0.719
+        },
+        {
+          "fold": 2,
+          "accuracy": 0.6881,
+          "precision": 0.6462,
+          "recall": 0.5122,
+          "f1_score": 0.5714,
+          "roc_auc": 0.7206,
+          "pr_auc": 0.6469
+        },
+        {
+          "fold": 3,
+          "accuracy": 0.7277,
+          "precision": 0.7213,
+          "recall": 0.5366,
+          "f1_score": 0.6154,
+          "roc_auc": 0.7873,
+          "pr_auc": 0.723
+        },
+        {
+          "fold": 4,
+          "accuracy": 0.7129,
+          "precision": 0.6667,
+          "recall": 0.5679,
+          "f1_score": 0.6133,
+          "roc_auc": 0.7514,
+          "pr_auc": 0.6982
+        },
+        {
+          "fold": 5,
+          "accuracy": 0.7079,
+          "precision": 0.6528,
+          "recall": 0.5802,
+          "f1_score": 0.6144,
+          "roc_auc": 0.7625,
+          "pr_auc": 0.7315
+        }
+      ],
+      "feature_coefficients": {
+        "mean_centipawn_loss": 0.0339,
+        "std_centipawn_loss": -0.0477,
+        "median_centipawn_loss": 0.0107,
+        "mean_norm_cp_loss": -0.1927,
+        "std_norm_cp_loss": 0.2154,
+        "blunder_rate": -0.184,
+        "mistake_rate": -0.2265,
+        "inaccuracy_rate": -0.0492,
+        "excellent_rate": 0.0087,
+        "top1_match_rate": 0.2717,
+        "used_mean_cp_loss": 0.0653,
+        "used_blunder_rate": 0.1477,
+        "move_count": 0.417,
+        "unstable_top1_match_rate": 0.5125,
+        "stable_top1_match_rate": 0.3289,
+        "depth_drop_rate": -0.159,
+        "critical_top1_match_rate": 0.1136,
+        "critical_mean_cp_loss": 0.0491
+      }
+    },
+    "random_forest": {
+      "baseline": {
+        "accuracy": 0.7069,
+        "precision": 0.6657,
+        "recall": 0.5479,
+        "f1_score": 0.6011,
+        "roc_auc": 0.7437,
+        "pr_auc": 0.6628,
+        "fold_acc_std": 0.0164,
+        "confusion_matrix": [
+          [
+            491,
+            112
+          ],
+          [
+            184,
+            223
+          ]
+        ],
+        "confusion_matrix_labels": [
+          "Fair (0)",
+          "Assisted (1)"
+        ]
+      },
+      "augmented": {
+        "accuracy": 0.7139,
+        "precision": 0.6777,
+        "recall": 0.5528,
+        "f1_score": 0.6089,
+        "roc_auc": 0.7614,
+        "pr_auc": 0.6938,
+        "fold_acc_std": 0.0199,
+        "confusion_matrix": [
+          [
+            496,
+            107
+          ],
+          [
+            182,
+            225
+          ]
+        ],
+        "confusion_matrix_labels": [
+          "Fair (0)",
+          "Assisted (1)"
+        ]
+      },
+      "delta": {
+        "accuracy": 0.007,
+        "precision": 0.012,
+        "recall": 0.0049,
+        "f1_score": 0.0078,
+        "roc_auc": 0.0177,
+        "pr_auc": 0.031
+      },
+      "fold_metrics_augmented": [
+        {
+          "fold": 1,
+          "accuracy": 0.6931,
+          "precision": 0.6418,
+          "recall": 0.5309,
+          "f1_score": 0.5811,
+          "roc_auc": 0.7521,
+          "pr_auc": 0.674
+        },
+        {
+          "fold": 2,
+          "accuracy": 0.703,
+          "precision": 0.6618,
+          "recall": 0.5488,
+          "f1_score": 0.6,
+          "roc_auc": 0.761,
+          "pr_auc": 0.7008
+        },
+        {
+          "fold": 3,
+          "accuracy": 0.7426,
+          "precision": 0.7344,
+          "recall": 0.5732,
+          "f1_score": 0.6438,
+          "roc_auc": 0.7674,
+          "pr_auc": 0.694
+        },
+        {
+          "fold": 4,
+          "accuracy": 0.698,
+          "precision": 0.6786,
+          "recall": 0.4691,
+          "f1_score": 0.5547,
+          "roc_auc": 0.7549,
+          "pr_auc": 0.7091
+        },
+        {
+          "fold": 5,
+          "accuracy": 0.7327,
+          "precision": 0.6753,
+          "recall": 0.642,
+          "f1_score": 0.6582,
+          "roc_auc": 0.7805,
+          "pr_auc": 0.7243
+        }
+      ],
+      "feature_importances": {
+        "unstable_top1_match_rate": 0.1616,
+        "top1_match_rate": 0.1409,
+        "critical_top1_match_rate": 0.0778,
+        "stable_top1_match_rate": 0.0745,
+        "excellent_rate": 0.0659,
+        "move_count": 0.0651,
+        "mean_centipawn_loss": 0.0533,
+        "depth_drop_rate": 0.0522,
+        "critical_mean_cp_loss": 0.0492,
+        "used_mean_cp_loss": 0.048,
+        "mean_norm_cp_loss": 0.0423,
+        "std_centipawn_loss": 0.035,
+        "std_norm_cp_loss": 0.0339,
+        "inaccuracy_rate": 0.0282,
+        "mistake_rate": 0.0201,
+        "used_blunder_rate": 0.0187,
+        "median_centipawn_loss": 0.0175,
+        "blunder_rate": 0.0159
+      }
+    }
+  },
+  "ablations_rf": {
+    "baseline_13": {
+      "accuracy": 0.7069,
+      "precision": 0.6657,
+      "recall": 0.5479,
+      "f1_score": 0.6011,
+      "roc_auc": 0.7437,
+      "pr_auc": 0.6628,
+      "fold_acc_std": 0.0164,
+      "confusion_matrix": [
+        [
+          491,
+          112
+        ],
+        [
+          184,
+          223
+        ]
+      ],
+      "confusion_matrix_labels": [
+        "Fair (0)",
+        "Assisted (1)"
+      ]
+    },
+    "depth_stability_16": {
+      "accuracy": 0.7208,
+      "precision": 0.6855,
+      "recall": 0.5676,
+      "f1_score": 0.621,
+      "roc_auc": 0.7533,
+      "pr_auc": 0.6863,
+      "fold_acc_std": 0.0181,
+      "confusion_matrix": [
+        [
+          497,
+          106
+        ],
+        [
+          176,
+          231
+        ]
+      ],
+      "confusion_matrix_labels": [
+        "Fair (0)",
+        "Assisted (1)"
+      ]
+    },
+    "critical_eval_15": {
+      "accuracy": 0.7069,
+      "precision": 0.6697,
+      "recall": 0.5381,
+      "f1_score": 0.5967,
+      "roc_auc": 0.7509,
+      "pr_auc": 0.6751,
+      "fold_acc_std": 0.027,
+      "confusion_matrix": [
+        [
+          495,
+          108
+        ],
+        [
+          188,
+          219
+        ]
+      ],
+      "confusion_matrix_labels": [
+        "Fair (0)",
+        "Assisted (1)"
+      ]
+    },
+    "all_augmented_18": {
+      "accuracy": 0.7139,
+      "precision": 0.6777,
+      "recall": 0.5528,
+      "f1_score": 0.6089,
+      "roc_auc": 0.7614,
+      "pr_auc": 0.6938,
+      "fold_acc_std": 0.0199,
+      "confusion_matrix": [
+        [
+          496,
+          107
+        ],
+        [
+          182,
+          225
+        ]
+      ],
+      "confusion_matrix_labels": [
+        "Fair (0)",
+        "Assisted (1)"
+      ]
+    }
+  },
+  "saved_artifacts": [
+    "models\\experimental\\chess_fraud_rf_v5_exp.joblib",
+    "models\\experimental\\chess_fraud_lr_v5_exp.joblib"
+  ]
+}
